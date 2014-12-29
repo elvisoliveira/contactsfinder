@@ -11,9 +11,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.phantomjs.PhantomJSDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
-import org.openqa.selenium.support.ui.Select;
 
 public class busca extends HttpServlet {
 
@@ -23,8 +23,12 @@ public class busca extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         DesiredCapabilities capabilities = DesiredCapabilities.phantomjs();
+        
+        // if using pamthonjs on windows, indicate the path
+        capabilities.setCapability("phantomjs.binary.path", "C:\\devel\\personal\\phantomjs\\phantomjs.exe");
+        
         PhantomJSDriver driver = new PhantomJSDriver(capabilities);
-        // driver = new FirefoxDriver();
+        // FirefoxDriver driver = new FirefoxDriver(capabilities);
 
         driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 
@@ -36,6 +40,7 @@ public class busca extends HttpServlet {
         // new Select(driver.findElement(By.id("pch_localidade_select"))).selectByVisibleText("Belo Horizonte");
         // driver.findElement(By.name("image")).click();
         // automatic selection
+        
         String orgm = "0";
         String cod_localidade = "31000";
         String atividade = "";
@@ -46,6 +51,8 @@ public class busca extends HttpServlet {
 
         String url = String.format("http://www.telelistas.net/templates/resultado_busca.aspx?q=&orgm=%s&cod_localidade=%s&atividade=%s&nome=%s&uf_busca=%s&image.x=%s&image.y=%s", orgm, cod_localidade, atividade, nome, uf_busca, imagex, imagey);
 
+        // @todo: set timeout in the get method, if take too long, try again.
+        // on the third failed attempt, stop the program and send an email warning.
         driver.get(url);
 
         List<WebElement> contacts = driver.findElements(By.cssSelector("div#Content_Regs table[width=\"468\"]"));
