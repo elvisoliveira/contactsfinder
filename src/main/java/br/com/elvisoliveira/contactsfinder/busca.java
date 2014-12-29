@@ -23,24 +23,15 @@ public class busca extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         DesiredCapabilities capabilities = DesiredCapabilities.phantomjs();
-        
+
         // if using pamthonjs on windows, indicate the path
         capabilities.setCapability("phantomjs.binary.path", "C:\\devel\\personal\\phantomjs\\phantomjs.exe");
-        
+
         PhantomJSDriver driver = new PhantomJSDriver(capabilities);
         // FirefoxDriver driver = new FirefoxDriver(capabilities);
 
         driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 
-        // manual selection
-        // driver.get("http://www.telelistas.net/");
-        // driver.findElement(By.id("nome")).clear();
-        // driver.findElement(By.id("nome")).sendKeys("john");
-        // new Select(driver.findElement(By.id("uf_busca"))).selectByVisibleText("MG");
-        // new Select(driver.findElement(By.id("pch_localidade_select"))).selectByVisibleText("Belo Horizonte");
-        // driver.findElement(By.name("image")).click();
-        // automatic selection
-        
         String orgm = "0";
         String cod_localidade = "31000";
         String atividade = "";
@@ -55,29 +46,28 @@ public class busca extends HttpServlet {
         // on the third failed attempt, stop the program and send an email warning.
         driver.get(url);
 
+        // loop check if there is more than one page, if yes retrive the 
+        // current page contacts and click on next button
+        // put the retrive contacts algoritm in another method
         List<WebElement> contacts = driver.findElements(By.cssSelector("div#Content_Regs table[width=\"468\"]"));
 
         Iterator<WebElement> i = contacts.iterator();
-        
+
         while (i.hasNext()) {
-            
             WebElement contact = i.next();
-            
             WebElement access = contact.findElement(By.cssSelector("td.text_resultado_ib a"));
-            
             WebElement addressE = contact.findElement(By.cssSelector("td.text_endereco_ib[width=\"294\"]"));
-            
+
             String name = access.getText();
-            
             String link = access.getAttribute("href");
-            
             String address = addressE.getText();
-            
+
+            // check if the database already registred the "address" field
+            // if not, make the registry by inserting it
             System.out.println(name);
             System.out.println(link);
             System.out.println(address);
             System.out.println("---");
-            
         }
 
         // driver.findElement(By.xpath("//img[contains(@src,'http://img.telelistas.net/img/por_rodape_prox.gif')]")).click();
