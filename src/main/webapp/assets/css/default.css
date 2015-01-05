@@ -1,0 +1,650 @@
+
+* {
+    color: #333333;
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-size: 14px;
+    margin: 0;
+    padding: 0;
+}
+hr {
+    background: none repeat scroll 0 0 #DDDDDD;
+    border: 0 none;
+    color: #FF0000;
+    float: left;
+    height: 1px;
+    margin: 25px 0;
+    width: 100%;
+}
+body.settings table {
+    float: left;
+    width: 300px !important;
+}
+body.settings form#default {
+    float: right;
+    width: 585px;
+}
+body.settings form#default fieldset {
+    float: left;
+    width: 563px;
+}
+body.settings form#default div.form-actions {
+    float: left;
+    padding: 15px 10px;
+    width: 565px;
+}
+.bottom {
+    -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    background-color: #F5F5F5;
+    background-repeat: no-repeat;
+    border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) #A2A2A2;
+    border-radius: 4px 4px 4px 4px;
+    border-style: solid;
+    border-width: 1px;
+    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.2) inset, 0 1px 2px rgba(0, 0, 0, 0.05);
+    color: black;
+    cursor: pointer;
+    display: inline-block;
+    float: left;
+    font-size: 12px;
+    height: 30px;
+    margin-bottom: 0;
+    padding: 0;
+    text-align: center;
+    text-decoration: none;
+    text-shadow: 0 1px 1px rgba(255, 255, 255, 0.75);
+    vertical-align: middle;
+    width: 100%;
+}
+.command {
+    -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    background-color: #006DCC;
+    background-repeat: repeat-x;
+    border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+    border-radius: 4px 4px 4px 4px;
+    border-style: solid;
+    border-width: 1px;
+    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.2) inset, 0 1px 2px rgba(0, 0, 0, 0.05);
+    color: #FFFFFF;
+    cursor: pointer;
+    display: inline-block;
+    font-size: 14px;
+    line-height: 20px;
+    margin-bottom: 0;
+    padding: 5px 12px;
+    text-align: center;
+    text-decoration: none;
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+    vertical-align: middle;
+}
+.navigation {
+    background: none repeat scroll 0 0 #000000;
+    float: left;
+    height: 40px;
+    position: fixed;
+    width: 100%;
+    z-index: 100;
+}
+.navigation .navigation-inner {
+    height: 40px;
+    margin: 0 auto;
+    width: 900px;
+}
+.navigation .navigation-inner .navigation-brand {
+    float: left;
+    padding-top: 11px;
+}
+.navigation .navigation-inner .navigation-brand a {
+    color: #FFFFFF;
+    font-size: 17px;
+    line-height: 17px;
+    text-decoration: none;
+}
+.navigation .navigation-inner .navigation-menu {
+    float: right;
+    height: 40px;
+}
+.navigation .navigation-inner .navigation-menu ul {
+    float: left;
+    height: 40px;
+}
+.navigation .navigation-inner .navigation-menu ul li {
+    float: right;
+    height: 40px;
+    list-style: none outside none;
+    padding: 0 15px;
+    position: relative;
+    text-align: left;
+}
+.navigation .navigation-inner .navigation-menu ul li a {
+    color: #FFFFFF;
+    float: left;
+    padding-top: 11px;
+    text-decoration: none;
+}
+.navigation .navigation-inner .navigation-menu ul li ul {
+    background: none repeat scroll 0 0 #000000;
+    display: none;
+    left: 0;
+    position: absolute;
+    top: 40px;
+    z-index: 900;
+}
+.navigation .navigation-inner .navigation-menu ul li ul li {
+    float: left;
+    list-style: none outside none;
+}
+.navigation .navigation-inner .navigation-menu ul li ul li a {
+    font-size: 14px;
+    line-height: 29px;
+    padding: 0;
+    white-space: nowrap;
+}
+.navigation .navigation-inner .navigation-menu ul li:hover ul {
+    display: block;
+    height: auto;
+}
+.container {
+    float: left;
+    margin-top: 40px;
+    position: relative;
+    width: 100%;
+}
+.container .container-inner {
+    float: left;
+    height: auto;
+    left: 50%;
+    margin: 20px auto 10px -450px;
+    padding-bottom: 20px;
+    position: absolute;
+    width: 900px;
+}
+.container .container-inner table {
+    border-collapse: separate;
+    border-left: 1px solid #DDDDDD;
+    border-radius: 4px 4px 4px 4px;
+    border-spacing: 0;
+    border-top: 1px solid #DDDDDD;
+    float: left;
+    width: 100%;
+}
+.container .container-inner table thead {
+}
+.container .container-inner table thead tr {
+}
+.container .container-inner table thead tr th {
+    border-bottom: 1px solid #DDDDDD;
+    border-right: 1px solid #DDDDDD;
+    line-height: 20px;
+    padding: 8px;
+    text-align: left;
+}
+.container .container-inner table tbody tr {
+}
+.container .container-inner table tbody tr td {
+    background-image: url("../img/bg-colormask.png");
+    background-size: contain;
+    border-bottom: 1px solid #DDDDDD;
+    border-right: 1px solid #DDDDDD;
+    padding: 8px;
+}
+.container .container-inner table tbody tr td div {
+}
+.container .container-inner table tbody tr td div ul {
+    float: left;
+    list-style: none outside none;
+    width: 100%;
+}
+.container .container-inner table tbody tr td div ul li {
+    float: left;
+    width: 100%;
+}
+.container .container-inner table tbody tr td div ul li a {
+    -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    background-color: #F5F5F5;
+    background-image: url("../img/glyphicons-halflings.png");
+    background-repeat: no-repeat;
+    border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) #A2A2A2;
+    border-radius: 4px 4px 4px 4px;
+    border-style: solid;
+    border-width: 1px;
+    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.2) inset, 0 1px 2px rgba(0, 0, 0, 0.05);
+    color: black;
+    cursor: pointer;
+    display: inline-block;
+    font-size: 12px;
+    height: 30px;
+    line-height: 30px;
+    margin-bottom: 0;
+    padding: 0;
+    text-align: center;
+    text-decoration: none;
+    text-shadow: 0 1px 1px rgba(255, 255, 255, 0.75);
+    vertical-align: middle;
+    width: 100%;
+}
+.container .container-inner table tbody tr td div ul li a.btn-success {
+    background-position: 7px -68px;
+}
+.container .container-inner table tbody tr td div ul li a.btn-info {
+    background-position: -89px -43px;
+    margin: 0 4px;
+}
+.container .container-inner table tbody tr td div ul li a.btn-danger {
+    background-position: -161px 5px;
+}
+form#default fieldset {
+    border: 1px solid #DDDDDD;
+    float: left;
+    margin-bottom: 20px;
+    padding: 10px;
+    width: 878px;
+}
+form#default fieldset legend {
+    border-bottom: 1px solid #DDDDDD;
+    float: left;
+    font-size: 21px;
+    line-height: 21px;
+    margin-bottom: 20px;
+    padding-bottom: 13px;
+    width: 100%;
+}
+form#default fieldset div.message {
+    background: none repeat scroll 0 0 #008000;
+    color: #FFFFFF;
+    float: left;
+    margin-bottom: 20px;
+    padding: 8px 5%;
+    width: 90%;
+}
+form#default fieldset dl {
+    float: left;
+    margin-bottom: 20px;
+    width: 100%;
+}
+form#default fieldset dl dt {
+    float: left;
+    text-align: right;
+    width: 28%;
+}
+form#default fieldset dl dt label {
+    float: right;
+    height: 20px;
+    line-height: 20px;
+    padding: 5px 0;
+}
+form#default fieldset dl dt button {
+    -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    background-color: #006DCC;
+    background-repeat: repeat-x;
+    border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+    border-radius: 4px 4px 4px 4px;
+    border-style: solid;
+    border-width: 1px;
+    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.2) inset, 0 1px 2px rgba(0, 0, 0, 0.05);
+    color: #FFFFFF;
+    cursor: pointer;
+    display: inline-block;
+    font-size: 14px;
+    line-height: 19px;
+    margin-bottom: 0;
+    padding: 3px 12px;
+    text-align: center;
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+    vertical-align: middle;
+}
+form#default fieldset dl dd {
+    float: right;
+    width: 70%;
+}
+form#default fieldset dl dd > input {
+    border: 1px solid #CCCCCC;
+    border-radius: 4px 4px 4px 4px;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset;
+    float: left;
+    font-size: 14px;
+    height: 20px;
+    padding: 4px 6px;
+    width: 87%;
+}
+form#default fieldset dl dd > textarea {
+    border: 1px solid #CCCCCC;
+    border-radius: 4px 4px 4px 4px;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset;
+    float: left;
+    font-size: 14px;
+    height: 150px;
+    padding: 4px 6px;
+    width: 87%;
+}
+form#default fieldset dl dd > span {
+    clear: both;
+    float: left;
+    padding: 7px;
+    width: 87%;
+}
+form#default fieldset dl dd div#cat_color {
+    clear: both;
+    float: left;
+    margin-top: 10px;
+}
+form#default fieldset dl dd select {
+    border: 1px solid #CCCCCC;
+    border-radius: 4px 4px 4px 4px;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset;
+    font-size: 14px;
+    height: 30px;
+    padding: 4px 6px;
+    width: 89%;
+}
+form#default fieldset dl#canvas-map {
+    float: left;
+    width: 100%;
+}
+form#default fieldset dl#canvas-map dt {
+    display: none;
+}
+form#default fieldset dl#canvas-map dd {
+    float: left;
+    height: 300px;
+    width: 100%;
+}
+form#default div.form-actions {
+    background: none repeat scroll 0 0 #F5F5F5;
+    border-top: 1px solid #E5E5E5;
+    float: left;
+    padding: 15px 275px;
+    width: 350px;
+}
+form#default div.form-actions button {
+    -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    background-color: #006DCC;
+    background-repeat: repeat-x;
+    border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+    border-radius: 4px 4px 4px 4px;
+    border-style: solid;
+    border-width: 1px;
+    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.2) inset, 0 1px 2px rgba(0, 0, 0, 0.05);
+    color: #FFFFFF;
+    cursor: pointer;
+    display: inline-block;
+    font-size: 14px;
+    line-height: 20px;
+    margin-bottom: 0;
+    padding: 4px 12px;
+    text-align: center;
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+    vertical-align: middle;
+}
+div.profile-data {
+    float: left;
+    width: 42%;
+}
+div.profile-data h3 {
+    float: left;
+    font-size: 25px;
+    padding-bottom: 20px;
+    width: 100%;
+}
+div.profile-data table {
+}
+div.profile-data table tr {
+}
+div.profile-data table tr td {
+}
+div.profile-visit {
+    float: right;
+    width: 55%;
+}
+div.profile-visit h3 {
+    float: left;
+    font-size: 26px;
+    width: 100%;
+}
+div.profile-visit > div {
+    background: none repeat scroll 0 0 #CCCCCC;
+    float: left;
+    height: 30px;
+    line-height: 30px;
+    margin: 20px 0;
+    text-indent: 10px;
+    width: 100%;
+}
+div.profile-visit > a {
+    float: right;
+    margin-top: 10px;
+}
+div.profile-visit ul {
+    float: left;
+    margin-top: 10px;
+    width: 100%;
+}
+div.profile-visit ul li {
+    border: 1px solid #000000;
+    float: left;
+    list-style: none outside none;
+    margin-top: 10px;
+    padding: 3%;
+    position: relative;
+    width: 463px;
+}
+div.profile-visit ul li div {
+    float: left;
+    width: 463px;
+}
+div.profile-visit ul li div.accordion-heading {
+}
+div.profile-visit ul li div.accordion-heading a {
+}
+div.profile-visit ul li div.collapse-body {
+}
+div.profile-visit ul li div.collapse-body div.collapse-info {
+}
+div.profile-visit ul li div.collapse-body div.collapse-bottom {
+}
+div.profile-visit ul li div.collapse-body div.collapse-bottom a {
+}
+div.profile-visit ul li div.head {
+    background: none repeat scroll 0 0 #CCCCCC;
+    font-weight: bold;
+    height: 30px;
+    line-height: 30px;
+    margin-bottom: 10px;
+    text-indent: 15px;
+    width: 400px;
+}
+div.profile-visit ul li div.body div.bottom {
+    position: absolute;
+    right: 15px;
+    top: 15px;
+    width: auto;
+}
+div.profile-visit form#default {
+    float: left;
+    margin-top: 30px;
+    width: 100%;
+}
+div.profile-visit form#default fieldset {
+    float: left;
+    width: 473px;
+}
+div.profile-visit form#default div.form-actions {
+    padding: 15px 73px;
+}
+div#pagination {
+    float: left;
+    height: 31px;
+    margin: 10px 0;
+    width: 100%;
+}
+div#pagination div#pagination-navigation {
+    float: right;
+}
+div#pagination div#pagination-navigation ul {
+    border-left: 1px solid #DDDDDD;
+    float: left;
+}
+div#pagination div#pagination-navigation ul li {
+    -moz-box-sizing: border-box;
+    background-color: #FFFFFF;
+    border-bottom: 1px solid #DDDDDD;
+    border-right: 1px solid #DDDDDD;
+    border-top: 1px solid #DDDDDD;
+    float: left;
+    font-family: 'Open Sans',sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    line-height: 1.42857;
+    list-style: none outside none;
+    margin-left: 0;
+    position: relative;
+    text-decoration: none;
+}
+div#pagination div#pagination-navigation ul li a {
+    float: left;
+    font-family: 'Open Sans',sans-serif;
+    font-size: 12px;
+    font-weight: normal;
+    padding: 6px 12px;
+    text-decoration: none;
+}
+div#pagination div#pagination-navigation ul li.first {
+}
+div#pagination div#pagination-navigation ul li.last {
+}
+div#pagination div#pagination-navigation ul li.current {
+    padding: 6px 12px;
+}
+div#pagination div#pagination-navigation ul li.next {
+}
+div#pagination div#pagination-navigation ul li.prev {
+}
+div#pagination div#pagination-description {
+    float: left;
+    font-size: 12px;
+    line-height: 31px;
+    text-indent: 5px;
+}
+tr#filter {
+}
+tr#filter input {
+    -moz-box-sizing: border-box;
+    border: 1px solid #CCCCCC;
+    border-radius: 4px 4px 4px 4px;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset;
+    float: left;
+    font-size: 14px;
+    height: 30px;
+    margin: 0;
+    padding: 0;
+    text-indent: 5px;
+    width: 100%;
+}
+tr#filter select {
+    -moz-box-sizing: border-box;
+    border: 1px solid #CCCCCC;
+    border-radius: 4px 4px 4px 4px;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset;
+    float: left;
+    font-size: 14px;
+    height: 30px;
+    margin: 0;
+    padding: 4px 6px;
+    width: 100%;
+}
+tr#filter button.bottom {
+}
+div.mobile {
+    margin: 2% 0 0;
+}
+div.mobile div.container-inner {
+    border: 1px solid #000000;
+    margin-left: -48%;
+    margin-top: 0;
+    padding: 0;
+    width: 96%;
+}
+div.mobile div.container-inner ul#mobile {
+    float: left;
+    padding: 2%;
+    width: 96%;
+}
+div.mobile div.container-inner ul#mobile li {
+    float: left;
+    list-style: none outside none;
+    width: 100%;
+}
+div.mobile div.container-inner ul#mobile li.selected {
+}
+div.mobile div.container-inner ul#mobile li div.title {
+    background: none repeat scroll 0 0 #000000;
+    border-bottom: 3px solid #CCCCCC;
+    color: #FFFFFF;
+    float: left;
+    font-size: 19px;
+    height: 40px;
+    line-height: 40px;
+    text-indent: 2%;
+    width: 100%;
+}
+div.mobile div.container-inner ul#mobile li div.content {
+    float: left;
+    height: 390px;
+    width: 100%;
+}
+div.mobile div.container-inner ul#mobile li div.content h3 {
+    margin-left: 2%;
+    margin-right: 2%;
+    padding-bottom: 10px;
+    padding-top: 10px;
+    width: 96%;
+}
+div.mobile div.container-inner ul#mobile li div.content table {
+    margin-left: 2%;
+    margin-right: 2%;
+    width: 96%;
+}
+div.mobile div.container-inner ul#mobile li div.profile-visit {
+}
+div.mobile div.container-inner ul#mobile li div.profile-visit ul {
+    margin-left: 2%;
+    margin-right: 2%;
+    margin-top: 0;
+    padding-bottom: 10px;
+    padding-top: 0;
+    width: 96%;
+}
+div.mobile div.container-inner ul#mobile li div.profile-visit ul li {
+    margin: 0;
+    padding: 0;
+}
+div.mobile div.container-inner ul#mobile li div.profile-visit ul li div.head {
+    margin: 0;
+    padding: 5px 2%;
+    width: 96%;
+}
+div.mobile div.container-inner ul#mobile li div.profile-visit ul li div.body {
+    padding: 2%;
+    width: 96%;
+}
+div.mobile div.container-inner ul#mobile li div.profile-visit ul li div.body div.info {
+    width: 100%;
+}
+div.mobile div.container-inner ul#mobile li div.profile-visit ul li div.body div.bottom {
+}
+div.mobile div.container-inner ul#mobile li div.profile-visit ul li div.body div.bottom a {
+}

@@ -61,8 +61,7 @@ public class Telelistas
                 // save the current loaded "driver" in the "drivers" global variable
                 drivers.add(driver.getPageSource());
             }
-        }
-        else
+        } else
         {
             // no results
             System.out.println("no result");
@@ -93,9 +92,9 @@ public class Telelistas
 
             for (Element contact : contacts)
             {
-                String name = contact.select("td.text_resultado_ib > a").text();
-                String link = contact.select("td.text_resultado_ib > a").attr("href");
-                String addr = contact.select("td.text_endereco_ib").text();
+                String name = contact.select("td.text_resultado_ib > a").text().trim();
+                String link = contact.select("td.text_resultado_ib > a").attr("href").trim();
+                String addr = contact.select("td.text_endereco_ib").text().trim();
 
                 HashMap<String, String> info = new HashMap<>();
 

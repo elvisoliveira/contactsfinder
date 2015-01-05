@@ -15,15 +15,23 @@ public class Busca extends HttpServlet
 {
 
     private String baseUrl;
+    private ArrayList<HashMap> contacts;
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
+        processRequest(request, response);
+    }
 
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
+    {
+        String name = request.getParameter("name");
+        
         String orgm = "0";
         String cod_localidade = "31000";
         String atividade = "";
-        String nome = URLEncoder.encode("jesse", "ISO-8859-1");
+        String nome = URLEncoder.encode(name, "ISO-8859-1");
         String uf_busca = "mg";
         String imagex = "0";
         String imagey = "0";
@@ -32,10 +40,21 @@ public class Busca extends HttpServlet
 
         Telelistas lista = new Telelistas();
         lista.getPage(url);
-        ArrayList<HashMap> contacts = lista.getContacts();
+        contacts = lista.getContacts();
         lista.close();
+        
+        processRequest(request, response);
+    }
 
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
+    {
+        // encoding
+        response.setContentType("text/html;charset=UTF-8");
+
+        // parameters
         request.setAttribute("contacts", contacts);
+
+        // dispaycher JSP/JSTL display
         RequestDispatcher view = request.getRequestDispatcher("/contactsfinder.jsp");
         view.forward(request, response);
     }
