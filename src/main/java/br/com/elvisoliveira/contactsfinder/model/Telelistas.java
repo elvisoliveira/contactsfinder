@@ -1,6 +1,7 @@
 package br.com.elvisoliveira.contactsfinder.model;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.concurrent.TimeUnit;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -74,8 +75,10 @@ public class Telelistas
         return !(next);
     }
 
-    public void getContacts()
+    public ArrayList<HashMap> getContacts()
     {
+        ArrayList<HashMap> contactsList = new ArrayList<>();
+
         // loop the "drivers" global variable
         for (String html : drivers)
         {
@@ -94,15 +97,18 @@ public class Telelistas
                 String link = contact.select("td.text_resultado_ib > a").attr("href");
                 String addr = contact.select("td.text_endereco_ib").text();
 
-                // check if the contact exist in the database
-                // if not, register it
-                
-                System.out.println(name);
-                System.out.println(link);
-                System.out.println(addr);
-                System.out.println("---");
+                HashMap<String, String> info = new HashMap<>();
+
+                // @TODO: check if the contact exist in the database if not, register it
+                info.put("name", name);
+                info.put("link", link);
+                info.put("addr", addr);
+
+                contactsList.add(info);
             }
         }
+
+        return contactsList;
     }
 
 }
