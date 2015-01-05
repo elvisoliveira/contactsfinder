@@ -3,30 +3,55 @@ package br.com.elvisoliveira.contactsfinder.model;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.concurrent.TimeUnit;
+import net.lightbody.bmp.proxy.ProxyServer;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Platform;
+import org.openqa.selenium.Proxy;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
 public class Telelistas
 {
 
     private final FirefoxDriver driver;
+    private final ProxyServer server;
     private final DesiredCapabilities capability;
     private final ArrayList<String> drivers = new ArrayList<>();
 
     private final String xpErro = "//td[contains(@background,'http://img.telelistas.net/img/por_fundotopo_erro.gif')]";
     private final String xpNext = "//img[contains(@src,'http://img.telelistas.net/img/por_rodape_prox.gif')]/parent::a";
 
-    public Telelistas()
+    public Telelistas() throws Exception
     {
+        // start the server and get the selenium proxy object
+        server = new ProxyServer(2314);
+        server.start();
+        server.setCaptureHeaders(true);
+
+        // blacklist 
+        server.blacklistRequests("https?://.*\\.scorecardresearch\\.com/.*", 410);
+        server.blacklistRequests("https?://.*\\.googletagservices\\.com/.*", 410);
+        server.blacklistRequests("https?://.*\\.google-analytics\\.com/.*", 410);
+        server.blacklistRequests("https?://.*\\.googleadservices\\.com/.*", 410);
+        server.blacklistRequests("https?://.*\\.googlesyndication\\.com/.*", 410);
+        server.blacklistRequests("https?://.*\\.facebook\\.com/.*", 410);
+        server.blacklistRequests("https?://.*\\.buscape\\.com/.*", 410);
+        server.blacklistRequests("https?://.*\\.navdmp\\.com/.*", 410);
+        server.blacklistRequests("https?://.*\\.buscape\\.com\\.br/.*", 410);
+        server.blacklistRequests("https?://.*\\.akamaihd\\.net/.*", 410);
+
+        // setup proxy server
+        Proxy proxy = server.seleniumProxy();
+
         capability = DesiredCapabilities.firefox();
         capability.setCapability("platform", Platform.ANY);
         capability.setCapability("binary", "/bin/firefox");
+        capability.setCapability(CapabilityType.PROXY, proxy);
 
         driver = new FirefoxDriver(capability);
         driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);

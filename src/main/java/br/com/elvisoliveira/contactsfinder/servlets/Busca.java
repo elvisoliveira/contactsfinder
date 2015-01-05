@@ -5,6 +5,8 @@ import java.io.IOException;
 import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -27,7 +29,7 @@ public class Busca extends HttpServlet
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
         String name = request.getParameter("name");
-        
+
         String orgm = "0";
         String cod_localidade = "31000";
         String atividade = "";
@@ -38,11 +40,18 @@ public class Busca extends HttpServlet
 
         String url = String.format("http://www.telelistas.net/templates/resultado_busca.aspx?q=&orgm=%s&cod_localidade=%s&atividade=%s&nome=%s&uf_busca=%s&image.x=%s&image.y=%s", orgm, cod_localidade, atividade, nome, uf_busca, imagex, imagey);
 
-        Telelistas lista = new Telelistas();
-        lista.getPage(url);
-        contacts = lista.getContacts();
-        lista.close();
-        
+        Telelistas lista;
+        try
+        {
+            lista = new Telelistas();
+            lista.getPage(url);
+            contacts = lista.getContacts();
+            lista.close();
+        } catch (Exception ex)
+        {
+            Logger.getLogger(Busca.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
         processRequest(request, response);
     }
 
