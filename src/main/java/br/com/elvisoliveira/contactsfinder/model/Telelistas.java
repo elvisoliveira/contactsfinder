@@ -1,5 +1,6 @@
 package br.com.elvisoliveira.contactsfinder.model;
 
+import java.net.ServerSocket;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.concurrent.TimeUnit;
@@ -28,22 +29,33 @@ public class Telelistas
 
     public Telelistas() throws Exception
     {
+        Integer port;
+
+        try (ServerSocket socket = new ServerSocket(0))
+        {
+            port = socket.getLocalPort();
+            socket.close();
+        }
+
         // start the server and get the selenium proxy object
-        server = new ProxyServer(2314);
+        server = new ProxyServer(port);
         server.start();
         server.setCaptureHeaders(true);
 
-        // blacklist 
-        server.blacklistRequests("https?://.*\\.scorecardresearch\\.com/.*", 410);
-        server.blacklistRequests("https?://.*\\.googletagservices\\.com/.*", 410);
-        server.blacklistRequests("https?://.*\\.google-analytics\\.com/.*", 410);
-        server.blacklistRequests("https?://.*\\.googleadservices\\.com/.*", 410);
-        server.blacklistRequests("https?://.*\\.googlesyndication\\.com/.*", 410);
-        server.blacklistRequests("https?://.*\\.facebook\\.com/.*", 410);
-        server.blacklistRequests("https?://.*\\.buscape\\.com/.*", 410);
-        server.blacklistRequests("https?://.*\\.navdmp\\.com/.*", 410);
-        server.blacklistRequests("https?://.*\\.buscape\\.com\\.br/.*", 410);
-        server.blacklistRequests("https?://.*\\.akamaihd\\.net/.*", 410);
+        // blacklist addresses for faster loader
+        server.blacklistRequests("http(s)?://.*\\.scorecardresearch\\.com/.*", 404);
+        server.blacklistRequests("http(s)?://.*\\.googletagservices\\.com/.*", 404);
+        server.blacklistRequests("http(s)?://.*\\.google-analytics\\.com/.*", 404);
+        server.blacklistRequests("http(s)?://.*\\.googleadservices\\.com/.*", 404);
+        server.blacklistRequests("http(s)?://.*\\.googlesyndication\\.com/.*", 404);
+        server.blacklistRequests("http(s)?://.*\\.facebook\\.com/.*", 404);
+        server.blacklistRequests("http(s)?://.*\\.buscape\\.com/.*", 404);
+        server.blacklistRequests("http(s)?://.*\\.navdmp\\.com/.*", 404);
+        server.blacklistRequests("http(s)?://.*\\.google\\.com/.*", 404);
+        server.blacklistRequests("http(s)?://.*\\.buscape\\.com\\.br/.*", 404);
+        server.blacklistRequests("http(s)?://.*\\.mundi\\.com\\.br/.*", 404);
+        server.blacklistRequests("http(s)?://.*\\.akamaihd\\.net/.*", 404);
+        server.blacklistRequests("http(s)?://.*\\.ophertas\\.net/.*", 404);
 
         // setup proxy server
         Proxy proxy = server.seleniumProxy();
@@ -86,7 +98,8 @@ public class Telelistas
                 // save the current loaded "driver" in the "drivers" global variable
                 drivers.add(driver.getPageSource());
             }
-        } else
+        }
+        else
         {
             // no results
             System.out.println("no result");
@@ -95,6 +108,8 @@ public class Telelistas
 
     private boolean getNext(FirefoxDriver driver)
     {
+        // in each case, loop check if there is more than one page, if yes retrive the 
+        // current page contacts and click on next button
         boolean next = driver.findElements(By.xpath(xpNext)).isEmpty();
         return !(next);
     }
@@ -106,11 +121,6 @@ public class Telelistas
         // loop the "drivers" global variable
         for (String html : drivers)
         {
-            // in each case, loop check if there is more than one page, if yes retrive the 
-            // current page contacts and click on next button
-            // put the retrive contacts algoritm in another method
-            // change to jsoup
-
             Document doc = Jsoup.parse(html);
 
             Elements contacts = doc.select("div#Content_Regs > table");
