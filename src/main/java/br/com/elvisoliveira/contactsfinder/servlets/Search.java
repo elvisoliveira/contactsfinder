@@ -13,10 +13,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public class Busca extends HttpServlet
+public class Search extends HttpServlet
 {
-
-    private String baseUrl;
     private ArrayList<HashMap> contacts;
 
     @Override
@@ -30,6 +28,10 @@ public class Busca extends HttpServlet
     {
         String name = request.getParameter("name");
 
+        // @TODO: validation od inputted field
+        // cannot be empty
+        // cannot be longer than c characters
+        
         String orgm = "0";
         String cod_localidade = "31000";
         String atividade = "";
@@ -49,7 +51,7 @@ public class Busca extends HttpServlet
             lista.close();
         } catch (Exception ex)
         {
-            Logger.getLogger(Busca.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Search.class.getName()).log(Level.SEVERE, null, ex);
         }
 
         processRequest(request, response);
@@ -67,5 +69,16 @@ public class Busca extends HttpServlet
         RequestDispatcher view = request.getRequestDispatcher("/contactsfinder.jsp");
         view.forward(request, response);
     }
-
+    
+    // @TODO: Servlet "Approval" with a list of already registred contacts in local
+    // database to approval, or rejection. 
+    // if approved, mark the status in the local database and send to 
+    // contactsmanager insertion waiting list
+    // if rejected, mark the status in the local database
+    
+    // @TODO: Servlet "List" with the  blacklisted and whitelisted names, 
+    // interect the new insertions wth the approved or rejected names
+    
+    // @TODO: Servlet "Machine", that automatically gets the last appoved oendent name
+    // in the white list and mmake the search automatically.
 }

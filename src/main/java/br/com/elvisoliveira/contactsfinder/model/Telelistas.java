@@ -29,8 +29,9 @@ public class Telelistas
 
     public Telelistas() throws Exception
     {
-        Integer port;
 
+        // generates a random port number
+        Integer port;
         try (ServerSocket socket = new ServerSocket(0))
         {
             port = socket.getLocalPort();
@@ -42,7 +43,7 @@ public class Telelistas
         server.start();
         server.setCaptureHeaders(true);
 
-        // blacklist addresses for faster loader
+        // blacklist addresses for faster page load
         server.blacklistRequests("http(s)?://.*\\.scorecardresearch\\.com/.*", 404);
         server.blacklistRequests("http(s)?://.*\\.googletagservices\\.com/.*", 404);
         server.blacklistRequests("http(s)?://.*\\.google-analytics\\.com/.*", 404);
@@ -60,11 +61,13 @@ public class Telelistas
         // setup proxy server
         Proxy proxy = server.seleniumProxy();
 
+        // setup desired browser capabilities
         capability = DesiredCapabilities.firefox();
         capability.setCapability("platform", Platform.ANY);
         capability.setCapability("binary", "/bin/firefox");
         capability.setCapability(CapabilityType.PROXY, proxy);
 
+        // startup browser
         driver = new FirefoxDriver(capability);
         driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
     }
@@ -98,7 +101,7 @@ public class Telelistas
                 // save the current loaded "driver" in the "drivers" global variable
                 drivers.add(driver.getPageSource());
             }
-        }
+        } 
         else
         {
             // no results
@@ -144,5 +147,12 @@ public class Telelistas
 
         return contactsList;
     }
+    
+    // @TODO: method setContacts, will save the contacts in the SQLite database
+    // if it was not saved before, so make a validation to detect repeted itens
 
+    // @TODO: method getExternal, make a request to contactsmanager to find if
+    // contacts is already in the main contacts database
+    
+    
 }
