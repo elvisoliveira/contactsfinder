@@ -77,7 +77,8 @@ public class Search extends HttpServlet
     // if rejected, mark the status in the local database
     
     // @TODO: Servlet "List" with the  blacklisted and whitelisted names, 
-    // interect the new insertions wth the approved or rejected names
+    // interect the new insertions wth the approved, rejected or already searched 
+    // names, no repetition is allowed
     
     // @TODO: Servlet "Machine", that automatically gets the last appoved oendent name
     // in the white list and mmake the search automatically.

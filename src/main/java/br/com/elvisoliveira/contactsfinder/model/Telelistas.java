@@ -23,6 +23,7 @@ public class Telelistas
     private final ProxyServer server;
     private final DesiredCapabilities capability;
     private final ArrayList<String> drivers = new ArrayList<>();
+    private final ArrayList<HashMap> contactsList = new ArrayList<>();
 
     private final String xpErro = "//td[contains(@background,'http://img.telelistas.net/img/por_fundotopo_erro.gif')]";
     private final String xpNext = "//img[contains(@src,'http://img.telelistas.net/img/por_rodape_prox.gif')]/parent::a";
@@ -119,8 +120,6 @@ public class Telelistas
 
     public ArrayList<HashMap> getContacts()
     {
-        ArrayList<HashMap> contactsList = new ArrayList<>();
-
         // loop the "drivers" global variable
         for (String html : drivers)
         {
@@ -150,7 +149,9 @@ public class Telelistas
     
     // @TODO: method setContacts, will save the contacts in the SQLite database
     // if it was not saved before, so make a validation to detect repeted itens
-
+    
+    
+    
     // @TODO: method getExternal, make a request to contactsmanager to find if
     // contacts is already in the main contacts database
     
