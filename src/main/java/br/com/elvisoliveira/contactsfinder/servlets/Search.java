@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 
 public class Search extends HttpServlet
 {
+
     private ArrayList<HashMap> contacts;
 
     @Override
@@ -31,25 +32,15 @@ public class Search extends HttpServlet
         // @TODO: validation od inputted field
         // cannot be empty
         // cannot be longer than c characters
-        
-        String orgm = "0";
-        String cod_localidade = "31000";
-        String atividade = "";
-        String nome = URLEncoder.encode(name, "ISO-8859-1");
-        String uf_busca = "mg";
-        String imagex = "0";
-        String imagey = "0";
-
-        String url = String.format("http://www.telelistas.net/templates/resultado_busca.aspx?q=&orgm=%s&cod_localidade=%s&atividade=%s&nome=%s&uf_busca=%s&image.x=%s&image.y=%s", orgm, cod_localidade, atividade, nome, uf_busca, imagex, imagey);
-
-        Telelistas lista;
         try
         {
+            Telelistas lista;
             lista = new Telelistas();
-            lista.getPage(url);
+            lista.getPage(name, "31000", "mg");
             contacts = lista.getContacts();
             lista.close();
-        } catch (Exception ex)
+        }
+        catch (Exception ex)
         {
             Logger.getLogger(Search.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -69,17 +60,15 @@ public class Search extends HttpServlet
         RequestDispatcher view = request.getRequestDispatcher("/contactsfinder.jsp");
         view.forward(request, response);
     }
-    
+
     // @TODO: Servlet "Approval" with a list of already registred contacts in local
     // database to approval, or rejection. 
     // if approved, mark the status in the local database and send to 
     // contactsmanager insertion waiting list
     // if rejected, mark the status in the local database
-    
     // @TODO: Servlet "List" with the  blacklisted and whitelisted names, 
     // interect the new insertions wth the approved, rejected or already searched 
     // names, no repetition is allowed
-    
     // @TODO: Servlet "Machine", that automatically gets the last appoved oendent name
     // in the white list and mmake the search automatically.
 }

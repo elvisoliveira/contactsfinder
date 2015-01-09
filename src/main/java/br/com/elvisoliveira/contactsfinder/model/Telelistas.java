@@ -1,6 +1,9 @@
 package br.com.elvisoliveira.contactsfinder.model;
 
+import br.com.elvisoliveira.contactsfinder.beans.ContactBean;
+import java.io.UnsupportedEncodingException;
 import java.net.ServerSocket;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.concurrent.TimeUnit;
@@ -27,6 +30,9 @@ public class Telelistas
 
     private final String xpErro = "//td[contains(@background,'http://img.telelistas.net/img/por_fundotopo_erro.gif')]";
     private final String xpNext = "//img[contains(@src,'http://img.telelistas.net/img/por_rodape_prox.gif')]/parent::a";
+
+    private String city;
+    private String province;
 
     public Telelistas() throws Exception
     {
@@ -79,8 +85,21 @@ public class Telelistas
         driver.quit();
     }
 
-    public void getPage(String url)
+    public void getPage(String name, String city, String province) throws UnsupportedEncodingException
     {
+        this.city = city;
+        this.province = province;
+
+        String orgm = "0";
+        String cod_localidade = city;
+        String atividade = "";
+        String nome = URLEncoder.encode(name, "ISO-8859-1");
+        String uf_busca = province;
+        String imagex = "0";
+        String imagey = "0";
+
+        String url = String.format("http://www.telelistas.net/templates/resultado_busca.aspx?q=&orgm=%s&cod_localidade=%s&atividade=%s&nome=%s&uf_busca=%s&image.x=%s&image.y=%s", orgm, cod_localidade, atividade, nome, uf_busca, imagex, imagey);
+
         // @todo: set timeout in the get method, if take too long, try again.
         // on the third failed attempt, stop the program and send an email warning.
         driver.get(url);
@@ -102,7 +121,7 @@ public class Telelistas
                 // save the current loaded "driver" in the "drivers" global variable
                 drivers.add(driver.getPageSource());
             }
-        } 
+        }
         else
         {
             // no results
@@ -135,25 +154,33 @@ public class Telelistas
 
                 HashMap<String, String> info = new HashMap<>();
 
-                // @TODO: check if the contact exist in the database if not, register it
+                // save hashmap of info to display
                 info.put("name", name);
                 info.put("link", link);
                 info.put("addr", addr);
 
                 contactsList.add(info);
+
+                //
+                ContactBean contacOb = new ContactBean();
+                contacOb.setName(name);
+                contacOb.setAddress(addr);
+                contacOb.setLink(link);
+                
+                contacOb.setCity(this.city);
+                contacOb.setProvince(this.province);
+                
+                contacOb.setApproval(null);
+                contacOb.setStatus("0");
+
             }
         }
 
         return contactsList;
     }
-    
+
     // @TODO: method setContacts, will save the contacts in the SQLite database
     // if it was not saved before, so make a validation to detect repeted itens
-    
-    
-    
     // @TODO: method getExternal, make a request to contactsmanager to find if
     // contacts is already in the main contacts database
-    
-    
 }
