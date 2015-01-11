@@ -24,7 +24,7 @@ public class ContactsModel
                 {
                     do
                     {
-                        System.out.println(rs.getString("name"));
+                        System.out.println(rs.getString("con_name"));
                     }
                     while (rs.next());
                 }
@@ -40,33 +40,32 @@ public class ContactsModel
     {
         try
         {
-            String sql = "INSERT INTO \"contacts\" (\"con_id\", "
-                    + " \"con_name\", "
-                    + " \"con_address\", "
-                    + " \"con_city\", "
-                    + " \"con_province\") "
-                    + " \"con_status\") "
-                    + " \"con_approval\") "
-                    + " VALUES (\"%s\",\"%s\",\"%s\",\"%s\",\"%s\",\"%s\"); ";
+            String sql = "INSERT INTO \"contacts\" (\"con_id\", \"con_name\", "
+                    + " \"con_address\", \"con_link\", \"con_city\", "
+                    + " \"con_province\", \"con_status\", \"con_approval\") "
+                    + " VALUES (%s, \"%s\", \"%s\", \"%s\", \"%s\", \"%s\", %s, %s);";
 
             String query = String.format(sql,
                     contact.getId(),
                     contact.getName(),
                     contact.getAddress(),
+                    contact.getLink(),
                     contact.getCity(),
                     contact.getProvince(),
                     contact.getStatus(),
                     contact.getApproval());
 
-            SQLite db = new SQLite();
-
-            Integer rs = db.stm.executeUpdate(query);
+            SQLite db;
+            
+            db = new SQLite();
+            db.stm.executeUpdate(query);
 
             return true;
         }
         catch (SQLException | ClassNotFoundException ex)
         {
             this.setMessage(ex.getMessage());
+            
             return false;
         }
     }
@@ -78,6 +77,8 @@ public class ContactsModel
 
     public void setMessage(String message)
     {
-        this.message = message;
+        System.out.println(message);
+        
+        this.message = message;   
     }
 }

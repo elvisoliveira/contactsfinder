@@ -1,6 +1,7 @@
 package br.com.elvisoliveira.contactsfinder.servlets;
 
 import br.com.elvisoliveira.contactsfinder.dao.ContactsModel;
+import java.io.File;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;

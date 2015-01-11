@@ -1,6 +1,7 @@
 package br.com.elvisoliveira.contactsfinder.model;
 
 import br.com.elvisoliveira.contactsfinder.beans.ContactBean;
+import br.com.elvisoliveira.contactsfinder.dao.ContactsModel;
 import java.io.UnsupportedEncodingException;
 import java.net.ServerSocket;
 import java.net.URLEncoder;
@@ -26,7 +27,7 @@ public class Telelistas
     private final ProxyServer server;
     private final DesiredCapabilities capability;
     private final ArrayList<String> drivers = new ArrayList<>();
-    private final ArrayList<HashMap> contactsList = new ArrayList<>();
+    private final ArrayList<HashMap> contactsList;
 
     private final String xpErro = "//td[contains(@background,'http://img.telelistas.net/img/por_fundotopo_erro.gif')]";
     private final String xpNext = "//img[contains(@src,'http://img.telelistas.net/img/por_rodape_prox.gif')]/parent::a";
@@ -36,6 +37,7 @@ public class Telelistas
 
     public Telelistas() throws Exception
     {
+        this.contactsList = new ArrayList<>();
 
         // generates a random port number
         Integer port;
@@ -137,7 +139,7 @@ public class Telelistas
         return !(next);
     }
 
-    public ArrayList<HashMap> getContacts()
+    public void getContacts()
     {
         // loop the "drivers" global variable
         for (String html : drivers)
@@ -161,22 +163,20 @@ public class Telelistas
 
                 contactsList.add(info);
 
-                //
+                // make the contact a bean
                 ContactBean contacOb = new ContactBean();
+                
                 contacOb.setName(name);
                 contacOb.setAddress(addr);
                 contacOb.setLink(link);
-                
+
                 contacOb.setCity(this.city);
                 contacOb.setProvince(this.province);
-                
-                contacOb.setApproval(null);
-                contacOb.setStatus("0");
 
+                ContactsModel contactM = new ContactsModel();
+                contactM.setContact(contacOb);
             }
         }
-
-        return contactsList;
     }
 
     // @TODO: method setContacts, will save the contacts in the SQLite database

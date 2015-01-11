@@ -7,6 +7,7 @@ public class ContactBean
     private String Name;
     private String Address;
     private String Link;
+    private String Phone;
     private String City;
     private String Province;
     private String Status;
@@ -85,6 +86,16 @@ public class ContactBean
     public void setLink(String Link)
     {
         this.Link = Link;
+    }
+
+    public String getPhone()
+    {
+        return Phone;
+    }
+
+    public void setPhone(String Phone)
+    {
+        this.Phone = Phone;
     }
 
 }

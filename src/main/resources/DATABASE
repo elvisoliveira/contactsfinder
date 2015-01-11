@@ -1,0 +1,9 @@
+BEGIN TRANSACTION;
+
+CREATE TABLE 'contacts' ('con_id' INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, 'con_name' TEXT NOT NULL, 'con_address' TEXT NOT NULL, 'con_link' TEXT NOT NULL, 'con_phone' INTEGER, 'con_city' TEXT NOT NULL, 'con_province' TEXT NOT NULL, 'con_status' BOOLEAN, 'con_approval' BOOLEAN);
+
+CREATE TABLE 'lists' ('lis_id' INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, 'lis_name' REAL, 'lis_status' BOOLEAN);
+
+CREATE TABLE 'thread' ('thr_id' INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, 'thr_name' INTEGER NOT NULL, 'thr_city' TEXT NOT NULL);
+
+COMMIT;

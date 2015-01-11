@@ -1,8 +1,8 @@
 package br.com.elvisoliveira.contactsfinder.servlets;
 
 import br.com.elvisoliveira.contactsfinder.model.Telelistas;
+import java.io.File;
 import java.io.IOException;
-import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.logging.Level;
@@ -37,7 +37,7 @@ public class Search extends HttpServlet
             Telelistas lista;
             lista = new Telelistas();
             lista.getPage(name, "31000", "mg");
-            contacts = lista.getContacts();
+            lista.getContacts();
             lista.close();
         }
         catch (Exception ex)

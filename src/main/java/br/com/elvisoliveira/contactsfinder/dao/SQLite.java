@@ -14,7 +14,7 @@ public class SQLite
 
         String OS = System.getProperty("os.name");
         String connection;
-        
+
         if (OS.startsWith("Windows"))
         {
             connection = "jdbc:sqlite:c:/database.db";
@@ -23,10 +23,9 @@ public class SQLite
         {
             connection = "jdbc:sqlite:/database.db";
         }
-        
+
         this.conn = DriverManager.getConnection(connection);
 
-        
         this.stm = this.conn.createStatement();
     }
 }
